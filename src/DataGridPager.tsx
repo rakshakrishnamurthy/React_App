@@ -2,7 +2,6 @@ import * as React from 'react';
 import { LocalDataSource } from 'igniteui-react-core';
 import { SortDescription } from 'igniteui-react-core';
 import { IgrColumnSortDescriptionCollection } from 'igniteui-react-grids';
-import { IgrColumnGroupDescriptionCollection } from 'igniteui-react-grids';
 import { IgrFilterExpressionCollection } from 'igniteui-react-core';
 import './DataGridPager.css';
 
@@ -89,7 +88,7 @@ export class DataGridPager extends React.Component<DataGridPagerProps> {
 
     public componentDidMount() {
         // data was provided initially so update the pager state
-        if (this.props.dataSource && this.props.dataSource.length > 0) {
+        if (this.props.dataSource.length > 0) {
             // this.state.dataSource.dataSource = this.props.dataSource;
             let ds = this.state.dataSource;
             ds.dataSource = this.props.dataSource;
@@ -164,15 +163,15 @@ export class DataGridPager extends React.Component<DataGridPagerProps> {
      * Update the pager's internal data source with grouping.
      * @param groupDescriptions The latest group descriptions to apply.
      */
-    public applyGroups(groupDescriptions: IgrColumnGroupDescriptionCollection) {
-        this.state.dataSource.groupDescriptions.clear();
-        for (let i = 0; i < groupDescriptions.count; i++) {
-            const gd = groupDescriptions.item(i);
-            console.log(SortDescription.create(gd.field, gd.sortDirection));
-            this.state.dataSource.groupDescriptions.add(SortDescription.create(gd.field, gd.sortDirection));
-        }
-        this.update(true);
-    }
+    // public applyGroups(groupDescriptions: IgrColumnGroupDescriptionCollection) {
+    //     this.state.dataSource.groupDescriptions.clear();
+    //     for (let i = 0; i < groupDescriptions.count; i++) {
+    //         const gd = groupDescriptions.item(i);
+    //         console.log(SortDescription.create(gd.field, gd.sortDirection));
+    //         this.state.dataSource.groupDescriptions.add(SortDescription.create(gd.field, gd.sortDirection));
+    //     }
+    //     this.update(true);
+    // }
     /**
      * Update the pager's internal data source with filtering.
      * @param filterExpressions The latest filters to apply.
