@@ -12,7 +12,7 @@ export default class App extends Component {
                 <Header></Header>
 <SearchBar></SearchBar>
  <DataGridRowPaging></DataGridRowPaging>
-{/* <Footer></Footer> */}
+ <Footer></Footer>
  
             </div>
         )

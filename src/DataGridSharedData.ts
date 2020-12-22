@@ -8,11 +8,10 @@ export class DataGridSharedData {
         }
 
         const employees: any[] = [];
-        
-        let maleCount: number = 0;
-        let femaleCount: number = 0;
         for (let i = 0; i < 30; i++) {
             console.log("emloyees")
+            const age: number = Math.round(this.getRandomNumber(20, 40));
+
             const gender: string = this.getRandomGender();
             const firstName: string = this.getRandomNameFirst(gender);
             const lastName: string = this.getRandomNameLast();
@@ -23,6 +22,7 @@ export class DataGridSharedData {
             person.ID = this.pad(i + 1, 5);
             person.LastName = lastName;
             person.Name = firstName + " " + lastName;
+            person.Age = age;
             employees.push(person);
         }
         return employees;
@@ -58,6 +58,8 @@ export class DataGridSharedData {
             return this.getRandomItem(this.femaleNames);
         }
     }
+  
+
    private static pad(num: number, size: number) {
         let s = num + "";
         while (s.length < size) {

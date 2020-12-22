@@ -10,7 +10,7 @@
 
  import DataGridRowPaging from './DataGridRowPaging';
 // ReactDOM.render(<DataGridRowPaging />, document.getElementById('root'));
-
+import "bootstrap/dist/css/bootstrap.min.css";
 import React from 'react';
 import App from './App';
 import ReactDOM from 'react-dom';

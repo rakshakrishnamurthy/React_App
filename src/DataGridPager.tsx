@@ -128,21 +128,17 @@ export class DataGridPager extends React.Component<DataGridPagerProps> {
         const rightSideBtnClasses = "icon-button " + (this.isButtonDisabled("right") ? "icon-button-disable" : "");
         return (
             <div className="pager-root">
-                <div className={leftSideBtnClasses} onClick={this.firstPage}>
-                    <i className="material-icons">first_page</i>
-                </div>
+
                 <div className={leftSideBtnClasses} onClick={this.previousPage}>
-                    <i className="material-icons">chevron_left</i>
+                    <i>Previous</i>
                 </div>
                 <div className="pager-text">
                     {this.state.pageNumber} of {this.state.pageCount}
                 </div>
                 <div className={rightSideBtnClasses} onClick={this.nextPage}>
-                    <i className="material-icons">chevron_right</i>
+                    <i>Next</i>
                 </div>
-                <div className={rightSideBtnClasses} onClick={this.lastPage}>
-                    <i className="material-icons">last_page</i>
-                </div>
+              
             </div>
         );
     }

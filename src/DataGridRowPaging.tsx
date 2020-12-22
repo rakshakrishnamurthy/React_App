@@ -5,6 +5,9 @@ import { IgrDataGridModule } from 'igniteui-react-grids';
 import { IgrTextColumn } from 'igniteui-react-grids';
 import { DataGridPager } from './DataGridPager';
 import { IgrGridColumnOptionsModule } from 'igniteui-react-grids';
+import {IgrNumericColumn} from 'igniteui-react-grids';
+import { ColumnResizingMode } from 'igniteui-react-grids';
+import { ColumnResizingAnimationMode } from 'igniteui-react-grids';
 
 IgrDataGridModule.register();
 IgrGridColumnOptionsModule.register();
@@ -51,18 +54,23 @@ export default class DataGridRowPaging extends React.Component<any, any> {
                     width="100%"
                     height="calc(100% - 65px)"
                     autoGenerateColumns={false}
+                    columnResizingAnimationMode={ColumnResizingAnimationMode.Interpolate}
+                    columnResizingMode={ColumnResizingMode.Deferred}
+                    columnResizingSeparatorWidth={4}
+                    // defaultColumnMinWidth="10px"
                     sortDescriptionsChanged={this.onSortChanged}           
                     filterExpressionsChanged={this.onFilterChanged}
                     isColumnOptionsEnabled="true">
-                    <IgrTextColumn field="ID" headerText="ID" width="*>150" />
+                    <IgrTextColumn field="ID" headerText="ID" width="*>150" isEditable="false"/>
                     <IgrTextColumn field="Name" headerText="Full Name" width="*>150" />
                     <IgrTextColumn field="Country" headerText="Country" width="*>120"/>
+                    <IgrNumericColumn field="Age" headerText="Age" width="*>120"/>
                     </IgrDataGrid>
 
                 <DataGridPager
                     ref={this.onPagerRef}
                     dataSource={this.data}
-                    pageSize={5}
+                    pageSize={9}
                     pagedChanged={this.onPageChanged}/>
             </div>
         );
