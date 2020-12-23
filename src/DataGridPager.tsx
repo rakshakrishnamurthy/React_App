@@ -94,7 +94,7 @@ export class DataGridPager extends React.Component<DataGridPagerProps> {
             ds.dataSource = this.props.dataSource;
 
             const count = Math.round(this.props.dataSource.length / this.props.pageSize);
-            this.setState({ pageCount: count, pageNumber: 1, dataSource: ds});
+            this.setState({ pageCount: count, pageNumber: 1, dataSource: ds });
         }
     }
 
@@ -138,7 +138,7 @@ export class DataGridPager extends React.Component<DataGridPagerProps> {
                 <div className={rightSideBtnClasses} onClick={this.nextPage}>
                     <i>Next</i>
                 </div>
-              
+
             </div>
         );
     }
@@ -155,19 +155,7 @@ export class DataGridPager extends React.Component<DataGridPagerProps> {
         }
         this.update(true);
     }
-    /**
-     * Update the pager's internal data source with grouping.
-     * @param groupDescriptions The latest group descriptions to apply.
-     */
-    // public applyGroups(groupDescriptions: IgrColumnGroupDescriptionCollection) {
-    //     this.state.dataSource.groupDescriptions.clear();
-    //     for (let i = 0; i < groupDescriptions.count; i++) {
-    //         const gd = groupDescriptions.item(i);
-    //         console.log(SortDescription.create(gd.field, gd.sortDirection));
-    //         this.state.dataSource.groupDescriptions.add(SortDescription.create(gd.field, gd.sortDirection));
-    //     }
-    //     this.update(true);
-    // }
+
     /**
      * Update the pager's internal data source with filtering.
      * @param filterExpressions The latest filters to apply.

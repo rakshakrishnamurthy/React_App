@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { DataGridSharedData } from './DataGridSharedData';
-import { IgrDataGrid, IgrImageColumn, IgrTemplateColumn } from 'igniteui-react-grids';
-import { IgrDataGridModule,IgrTemplateCellUpdatingEventArgs } from 'igniteui-react-grids';
+import { IgrDataGrid, IgrTemplateColumn } from 'igniteui-react-grids';
+import { IgrDataGridModule, IgrTemplateCellUpdatingEventArgs } from 'igniteui-react-grids';
 import { IgrTextColumn } from 'igniteui-react-grids';
 import { DataGridPager } from './DataGridPager';
-import { IgrGridColumnOptionsModule,IgrTemplateCellInfo } from 'igniteui-react-grids';
+import { IgrGridColumnOptionsModule, IgrTemplateCellInfo } from 'igniteui-react-grids';
 import { ColumnResizingMode } from 'igniteui-react-grids';
 import { ColumnResizingAnimationMode } from 'igniteui-react-grids';
 import MaleImage from '../src/images/Male.png'
@@ -85,87 +85,92 @@ export default class DataGridRowPaging extends React.Component<any, any> {
                     columnResizingAnimationMode={ColumnResizingAnimationMode.Interpolate}
                     columnResizingMode={ColumnResizingMode.Deferred}
                     columnResizingSeparatorWidth={4}
-                 
-                    sortDescriptionsChanged={this.onSortChanged}           
+
+                    sortDescriptionsChanged={this.onSortChanged}
                     filterExpressionsChanged={this.onFilterChanged}
-                    
+
                     isColumnOptionsEnabled="true">
-                    <IgrTextColumn field="ID" headerText="ID" width="*>90" isEditable="false"/>
-                    <IgrTextColumn field="Name" headerText="Full Name"width="*>90" />
-                    <IgrTemplateColumn field="Country" headerText="Country" isFilteringEnabled="False"cellUpdating={this.countrySelection}width="*>90" isEditable="false" />
+                    <IgrTextColumn field="ID" headerText="ID" width="*>90" isEditable="false" />
+                    <IgrTextColumn field="Name" headerText="Full Name" width="*>90" />
+                    <IgrTemplateColumn field="Country" headerText="Country" isFilteringEnabled="False" cellUpdating={this.countrySelection} width="*>90" isEditable="false" />
                     <IgrTemplateColumn field="Gender" headerText="Gender" isFilteringEnabled="False" cellUpdating={this.genderSelection}></IgrTemplateColumn>
-                    </IgrDataGrid>
+                </IgrDataGrid>
 
                 <DataGridPager
                     ref={this.onPagerRef}
                     dataSource={this.data}
                     pageSize={10}
-                    pagedChanged={this.onPageChanged}/>
+                    pagedChanged={this.onPageChanged} />
 
             </div>
         );
     }
 
-    public countrySelection(s: IgrTemplateColumn, e: IgrTemplateCellUpdatingEventArgs){
+    private getImageSrcByItem(item: string) {
+        var src = "";
+
+        switch (item) {
+            case 'Germany': {
+                src = Germany
+                break;
+            }
+            case 'France': {
+                src = France
+                break;
+            }
+            case 'Canada': {
+                src = Canada
+                break;
+            }
+            default: {
+                src = India
+                break;
+            }
+        }
+
+        return src;
+    }
+
+    public countrySelection = (s: IgrTemplateColumn, e: IgrTemplateCellUpdatingEventArgs) => {
         const content = e.content as HTMLDivElement;
-        let space;
-        let image;
         const info = e.cellInfo as IgrTemplateCellInfo;
         const item = info.rowItem.Country;
+        let space;
+        let image;
+
         if (content.childElementCount === 0) {
-    
-             image = document.createElement('img');
-             space= document.createElement('span')
-             space.textContent =" "+ item;
-             
-             switch (item) {
-                case 'Germany':{
-                        image.src=Germany
-                        break; }
-                case 'France':{
-                        image.src=France
-                        break; }
-                case 'Canada':{
-                        image.src=Canada
-                        break; }
-                    
-                default:{
-                        image.src=India
-                        break; }
-             }
-                    content.appendChild(image);
-                    content.appendChild(space)
-
-    }
-}
-
-    public  genderSelection(s: IgrTemplateColumn, e: IgrTemplateCellUpdatingEventArgs){
-
- const content = e.content as HTMLDivElement;
-    let span1: HTMLSpanElement | null = null;
-    let image;
-    const info = e.cellInfo as IgrTemplateCellInfo;
-    const item = info.rowItem.Gender;
-    if (content.childElementCount === 0) {
-
-        span1 = document.createElement("span");
-         image = document.createElement('img');
-       
-        if(item=="Male"){
-            image.src=MaleImage;
-       
+            image = document.createElement('img');
+            space = document.createElement('span')
+            space.textContent = " " + item;
+            image.src = this.getImageSrcByItem(item);
+            content.appendChild(image);
+            content.appendChild(space);
         }
-        else
-        image.src=FemaleImage;
-        content.appendChild(image);
+        else {
+            image = content.children[0] as HTMLImageElement;
+            space = content.children[1] as HTMLSpanElement;
+            image.src = this.getImageSrcByItem(item);
+            space.textContent = " " + item;
+        }
     }
-    else {
-        span1 = content.children[0] as HTMLSpanElement;
-        image = content.children[1] as HTMLImageElement;
+
+    public genderSelection(s: IgrTemplateColumn, e: IgrTemplateCellUpdatingEventArgs) {
+        const content = e.content as HTMLDivElement;
+        const info = e.cellInfo as IgrTemplateCellInfo;
+        const item = info.rowItem.Gender;
+        let image;
+
+        if (content.childElementCount === 0) {
+            image = document.createElement('img');
+            image.src = item == "Male" ? MaleImage : FemaleImage;
+            content.appendChild(image);
+        }
+        else {
+            image = content.children[0] as HTMLImageElement;
+            image.src = item == "Male" ? MaleImage : FemaleImage;
+        }
     }
-   
-       
-   }
+
     private onSortChanged = () => {
         if (this.pager) {
             this.pager.applySorts(this.grid.sortDescriptions);
@@ -182,3 +187,4 @@ export default class DataGridRowPaging extends React.Component<any, any> {
         this.grid.scrollToRowByIndex(0);
     };
 }
+
