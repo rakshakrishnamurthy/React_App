@@ -90,7 +90,7 @@ export default class DataGridRowPaging extends React.Component<any, any> {
                     filterExpressionsChanged={this.onFilterChanged}
 
                     isColumnOptionsEnabled="true">
-                    <IgrTextColumn field="Customer ID" headerText="ID" width="*>90" isEditable="false" />
+                    <IgrTextColumn field="ID" headerText="Customer ID" width="*>90" isEditable="false" />
                     <IgrTextColumn field="Name" headerText="Full Name" width="*>90" />
                     <IgrTemplateColumn field="Country" headerText="Country" isFilteringEnabled="False" cellUpdating={this.countrySelection} width="*>90" isEditable="false" />
                     <IgrTemplateColumn field="Gender" headerText="Gender" isFilteringEnabled="False" cellUpdating={this.genderSelection}></IgrTemplateColumn>
