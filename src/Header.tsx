@@ -13,10 +13,12 @@ export default function Header() {
     <a className="navbar-brand ml-0 " href="#">
         <img  src={img1} alt="logo" style={{height:'50px'}} className="float-left"></img></a>
     <div className="text-white active">Encompass</div>
-    <div className="collapse navbar-collapse " id="navbarSupportedContent">
+      <div className="collapse navbar-collapse " id="navbarSupportedContent">
       <ul className="navbar-nav me-auto mb-2 mb-lg-0 ml-auto">
         <li className="nav-item">
-          <a className="nav-link text-white  active" aria-current="page" href="#"><FontAwesomeIcon icon={faBars}></FontAwesomeIcon>&nbsp;Menu</a>
+          <a className="nav-link text-white  active" aria-current="page" href="#"><FontAwesomeIcon icon={faBars}></FontAwesomeIcon>&nbsp;Menu
+    
+          </a>
         </li>
       
         <li className="nav-item">

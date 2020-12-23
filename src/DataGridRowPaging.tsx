@@ -14,7 +14,8 @@ import Canada from '../src/images/Canada.png'
 import India from '../src/images/India.png'
 import France from '../src/images/France.png'
 import './DataGridPager.css';
-
+import { FilterFactory } from 'igniteui-react-core';
+import { FilterExpression } from 'igniteui-react-core';
 
 IgrDataGridModule.register();
 IgrGridColumnOptionsModule.register();
@@ -24,6 +25,7 @@ export default class DataGridRowPaging extends React.Component<any, any> {
     private data: any[];
     private grid: IgrDataGrid;
     private pager: DataGridPager;
+    public filterFactory: FilterFactory;
 
     constructor(props: any) {
         super(props);
@@ -53,6 +55,24 @@ export default class DataGridRowPaging extends React.Component<any, any> {
         }
     }
 
+    applyFilter() {
+        this.grid.filterExpressions.clear();
+
+        this.filterFactory = new FilterFactory();
+        const expression = this.props.searchText.toUpperCase();
+        const column = this.filterFactory.property("Name").toUpper();
+
+        let filter: FilterExpression;
+        filter = column.contains(expression);
+        this.grid.filterExpressions.add(filter);
+    }
+
+    public componentDidUpdate(previousProps: any) {
+        if (previousProps.searchText !== this.props.searchText) {
+            this.applyFilter();
+        }
+    }
+
     public render(): JSX.Element {
         return (
             <div className="igContainer ">
@@ -72,8 +92,8 @@ export default class DataGridRowPaging extends React.Component<any, any> {
                     isColumnOptionsEnabled="true">
                     <IgrTextColumn field="ID" headerText="ID" width="*>90" isEditable="false"/>
                     <IgrTextColumn field="Name" headerText="Full Name"width="*>90" />
-                    <IgrTemplateColumn field="Country" headerText="Country" cellUpdating={this.countrySelection}width="*>90" isEditable="false" />
-                    <IgrTemplateColumn field="Gender" headerText="Gender" cellUpdating={this.genderSelection}></IgrTemplateColumn>
+                    <IgrTemplateColumn field="Country" headerText="Country" isFilteringEnabled="False"cellUpdating={this.countrySelection}width="*>90" isEditable="false" />
+                    <IgrTemplateColumn field="Gender" headerText="Gender" isFilteringEnabled="False" cellUpdating={this.genderSelection}></IgrTemplateColumn>
                     </IgrDataGrid>
 
                 <DataGridPager

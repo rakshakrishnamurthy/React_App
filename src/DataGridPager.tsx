@@ -200,11 +200,7 @@ export class DataGridPager extends React.Component<DataGridPagerProps> {
         this.setState({ pageNumber: Math.min(this.state.pageNumber + 1, this.state.pageCount) });
     }
     /**
-     * Click handler for the last page button.
-     */
-    private lastPage = () => {
-        this.setState({ pageNumber: this.state.pageCount });
-    }
+  
     /**
      * Quick helper to determine if one of the paging buttons is disabled or not.
      */
