@@ -169,13 +169,7 @@ export class DataGridPager extends React.Component<DataGridPagerProps> {
         this.update(true);
     }
 
-    /**
-     * Click handler for the first page button.
-     */
-    private firstPage = () => {
-        this.setState({ pageNumber: 1 });
-    }
-    /**
+     /**
      * Click handler for the previous page button.
      */
     private previousPage = () => {

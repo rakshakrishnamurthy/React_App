@@ -85,15 +85,13 @@ export default class DataGridRowPaging extends React.Component<any, any> {
                     columnResizingAnimationMode={ColumnResizingAnimationMode.Interpolate}
                     columnResizingMode={ColumnResizingMode.Deferred}
                     columnResizingSeparatorWidth={4}
-
                     sortDescriptionsChanged={this.onSortChanged}
                     filterExpressionsChanged={this.onFilterChanged}
-
                     isColumnOptionsEnabled="true">
                     <IgrTextColumn field="ID" headerText="Customer ID" width="*>90" isEditable="false" />
                     <IgrTextColumn field="Name" headerText="Full Name" width="*>90" />
-                    <IgrTemplateColumn field="Country" headerText="Country" isFilteringEnabled="False" cellUpdating={this.countrySelection} width="*>90" isEditable="false" />
-                    <IgrTemplateColumn field="Gender" headerText="Gender" isFilteringEnabled="False" cellUpdating={this.genderSelection}></IgrTemplateColumn>
+                    <IgrTemplateColumn field="Country" headerText="Country" cellUpdating={this.countrySelection} width="*>90" isEditable="false" />
+                    <IgrTemplateColumn field="Gender" headerText="Gender" cellUpdating={this.genderSelection}></IgrTemplateColumn>
                 </IgrDataGrid>
 
                 <DataGridPager
